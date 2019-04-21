@@ -3,19 +3,30 @@
 #include <iostream>
 
 using namespace std;
+RingList::RingList() : head{ nullptr }, tail{ nullptr }, current{ nullptr } {};
 
-RingList::RingList()
-{
-	head = nullptr;
-	tail = nullptr;
-	current = nullptr;
-}
-
-
-RingList::~RingList()
-{
+RingList::~RingList() {
 	deleteAll();
 }
+
+RingList::RingList(RingList const& list) {
+	copy(list);
+}
+
+void RingList::copy(RingList const& list) {
+	Node * temp = list.head;
+
+	if (temp == nullptr) {
+		return;
+	}
+
+	do {
+		this->addNode(temp->data);
+		temp = temp->next;
+	} while (temp != list.head);
+}
+
+
 
 void RingList::addNode(int data) {
 	if (head == nullptr) {
@@ -126,19 +137,26 @@ bool RingList::operator!() const
 {
 	return this->head != nullptr;
 }
+void RingList::operator=(RingList const& toAssign){
+	copy(toAssign);
+}
 //postfix
 RingList RingList::operator++(int)
 {
 	RingList temp = *this;
-	++*this;
+
+	if (this->current != nullptr) {
+		this->current = this->current->next;
+	}
+
 	return temp;
 }
 //prefix
-RingList& RingList::operator++()
+/*RingList& RingList::operator++()
 {
 	if (this->current != nullptr) {
 		this->current = this->current->next;
 	}
 
 	return *this;
-}
+}*/

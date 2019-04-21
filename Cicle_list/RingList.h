@@ -4,6 +4,7 @@ class RingList
 public:
 	RingList();
 	~RingList();
+	RingList(const RingList& list);
 
 	struct Node {
 		int data;
@@ -14,6 +15,14 @@ public:
 		return current;
 	}
 
+	/*Node *getHead() const {
+		return head;
+	}
+
+	Node *getCurrentNode() const {
+		return current;
+	}*/
+
 	void addNode(int data);	
 	void deleteNodeByData(int data);
 	void deleteAll();
@@ -21,6 +30,7 @@ public:
 	void moveCurrentPointerToHead();
 	void moveCurrentPointerToTail();
 	bool operator! () const;
+	void operator=(RingList const&);
 	RingList operator++ (int);
 	RingList& operator++ ();
 	void sort();
@@ -31,4 +41,5 @@ private:
 
 	void deleteNode(Node *prev, Node *target);
 	void deleteHead();
+	void copy(RingList const&);
 };
