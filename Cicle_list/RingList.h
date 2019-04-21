@@ -21,6 +21,7 @@ public:
 	void moveCurrentPointerToHead();
 	void moveCurrentPointerToTail();
 	bool operator! () const;
+	RingList operator++ (int);
 	RingList& operator++ ();
 	void sort();
 private:

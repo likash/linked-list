@@ -14,14 +14,7 @@ RingList::RingList()
 
 RingList::~RingList()
 {
-	while (head != nullptr)
-	{
-		Node *temp = head->next;
-		delete head;
-		head = temp;
-	}
-	current = nullptr;
-	tail = nullptr;
+	deleteAll();
 }
 
 void RingList::addNode(int data) {
@@ -133,9 +126,19 @@ bool RingList::operator!() const
 {
 	return this->head != nullptr;
 }
-
+//postfix
+RingList RingList::operator++(int)
+{
+	RingList temp = *this;
+	++*this;
+	return temp;
+}
+//prefix
 RingList& RingList::operator++()
 {
-	this->current = this->current->next;
+	if (this->current != nullptr) {
+		this->current = this->current->next;
+	}
+
 	return *this;
 }
